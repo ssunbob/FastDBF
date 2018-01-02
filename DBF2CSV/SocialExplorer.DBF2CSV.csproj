@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DBF2CSV\SocialExplorer.DBF2CSV.csproj" />
     <ProjectReference Include="..\FastDBF\SocialExplorer.FastDBF.csproj" />
   </ItemGroup>
 

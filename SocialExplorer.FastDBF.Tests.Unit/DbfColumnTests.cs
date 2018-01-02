@@ -1,102 +1,48 @@
-﻿#region Usings
+﻿using SocialExplorer.IO.FastDBF;
 using System;
-
-using NUnit.Framework;
-
-using SocialExplorer.IO.FastDBF;
-
-
-#endregion
-
+using System.Collections.Generic;
+using System.Text;
+using Xunit;
 
 namespace SocialExplorer.FastDBF.Tests.Unit
 {
-	[TestFixture]
     public class DbfColumnTests
     {
-		# region Setup and Tear Down
-		/// <summary>
-		/// TestFixtureSetUp called once before any tests have been run in the same TestFixture
-		/// </summary>
-		[TestFixtureSetUp]
-		public void FixtureSetUp()
-		{
-		}
+        #region -- Constructor tests --
+        [Fact]
+        public void DbfColumn_Construct_NameNull_ThrowsException()
+        {
+            var ex = Assert.Throws<Exception>(() => new DbfColumn(null, default(DbfColumn.DbfColumnType)));
+            Assert.Equal("Field names must be at least one char long and can not be null.", ex.Message);
+        }
 
-		/// <summary>
-		/// SetsUp is called once before each Test within the same TestFxiture
-		/// If this throws an exception no Test in the TestFixture are run.
-		/// </summary>
-		[SetUp]
-		public void SetUp()
-		{
-		}
+        [Fact]
+        public void DbfColumn_Construct_NameEmpty_ThrowsException()
+        {
+            var ex = Assert.Throws<Exception>(() => new DbfColumn(String.Empty, default(DbfColumn.DbfColumnType)));
+            Assert.Equal("Field names must be at least one char long and can not be null.", ex.Message);
+        }
 
-		/// <summary>
-		/// TearsDown is called once after each Test within the same TestFixture.
-		/// Will not run if no tess are run due to [SetUp] throwing an exception
-		/// </summary>
-		[TearDown]
-		public void TearDown()
-		{
-		}
+        [Fact]
+        public void DbfColumn_Construct_NameLongerThan11Chars_ThrowsException()
+        {
+            var ex = Assert.Throws<Exception>(() => new DbfColumn("TheseAreMoreThan11Chars", default(DbfColumn.DbfColumnType)));
+            Assert.Equal("Field names can not be longer than 11 chars.", ex.Message);
+        }
 
-		/// <summary>
-		/// TestFixtureTearDown called once after all tests have been run in the same TestFixture
-		/// </summary>
-		[TestFixtureTearDown]
-		public void FixtureTearDown()
-		{
-		}
-		#endregion
+        [Fact]
+        public void DbfColumn_Construct_DbfColumnTypeNumber_NoLenghtNorDecimalPrecisionSpecified2_ThrowsException()
+        {
+            var ex = Assert.Throws<Exception>(() => new DbfColumn("COLUMN", DbfColumn.DbfColumnType.Number, 0, 0));
+            Assert.Equal("Invalid field length specified. Field length can not be zero or less than zero.", ex.Message);
+        }
 
-
-		#region Tests
-
-
-		#region Constructors
-		[Test]
-		[ExpectedException(typeof(Exception), ExpectedMessage = "Field names must be at least one char long and can not be null.")]
-		public void DbfColumn_Construct_NameNull_ThrowsException()
-		{
-			var dbfColumn = new DbfColumn(null, default(DbfColumn.DbfColumnType));
-		}
-
-		[Test]
-		[ExpectedException(typeof(Exception), ExpectedMessage = "Field names must be at least one char long and can not be null.")]
-		public void DbfColumn_Construct_NameEmpty_ThrowsException()
-		{
-			var dbfColumn = new DbfColumn(string.Empty, default(DbfColumn.DbfColumnType));
-		}
-		[Test]
-		[ExpectedException(typeof(Exception), ExpectedMessage = "Field names can not be longer than 11 chars.")]
-		public void DbfColumn_Construct_NameLongerThan11Chars_ThrowsException()
-		{
-			var dbfColumn = new DbfColumn("TheseAreMoreThan11Chars", default(DbfColumn.DbfColumnType));
-		}
-
-		[Test]
-		[ExpectedException(typeof(Exception), ExpectedMessage = "Invalid field length specified. Field length can not be zero or less than zero.")]
-		public void DbfColumn_Construct_DbfColumnTypeNumber_NoLenghtNorDecimalPrecisionSpecified_ThrowsException()
-		{
-			var dbfColumn = new DbfColumn("COLUMN", DbfColumn.DbfColumnType.Number);
-		}
-
-		[Test]
-		[ExpectedException(typeof(Exception), ExpectedMessage = "Invalid field length specified. Field length can not be zero or less than zero.")]
-		public void DbfColumn_Construct_DbfColumnTypeNumber_NoLenghtNorDecimalPrecisionSpecified2_ThrowsException()
-		{
-			var dbfColumn = new DbfColumn("COLUMN", DbfColumn.DbfColumnType.Number, 0, 0);
-		}
-
-		[Test]
-		[ExpectedException(typeof(Exception), ExpectedMessage = "Decimal precision can not be larger than the length of the field.")]
-		public void DbfColumn_Construct_DbfColumnTypeNumber_LenghtBiggerThanDecimalPrecision_ThrowsException()
-		{
-			var dbfColumn = new DbfColumn("COLUMN", DbfColumn.DbfColumnType.Number, 1, 2);
-		}
-
-		#endregion
-		#endregion
-	}
+        [Fact]
+        public void DbfColumn_Construct_DbfColumnTypeNumber_LenghtBiggerThanDecimalPrecision_ThrowsException()
+        {
+            var ex = Assert.Throws<Exception>(() => new DbfColumn("COLUMN", DbfColumn.DbfColumnType.Number, 1, 2));
+            Assert.Equal("Decimal precision can not be larger than the length of the field.", ex.Message);
+        }
+        #endregion
+    }
 }

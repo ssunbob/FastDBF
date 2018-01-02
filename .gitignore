@@ -11,6 +11,10 @@
 # see: https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 # =========================
 
+.vs
+.vscode
+.code
+
 # User-specific files
 *.suo
 *.user
