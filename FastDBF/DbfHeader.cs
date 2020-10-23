@@ -603,9 +603,11 @@ namespace SocialExplorer.IO.FastDBF
             {
 
                 // read the field name				
-                char[] buffer = new char[11];
-                buffer = reader.ReadChars(11);
-                string sFieldName = new string(buffer);
+                // Hint:use byte->encoding char rather than use char only
+                // to improve the situation when field name has multibyte Characters like CJK. 
+                byte[] buffer = new byte[11];
+                buffer = reader.ReadBytes(11);
+                string sFieldName = new string(encoding.GetChars(buffer));
                 int nullPoint = sFieldName.IndexOf((char)0);
                 if (nullPoint != -1)
                     sFieldName = sFieldName.Substring(0, nullPoint);
