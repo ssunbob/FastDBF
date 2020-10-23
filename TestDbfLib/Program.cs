@@ -6,10 +6,12 @@ using System.Text;
 
 namespace TestDbfLib
 {
+
     internal class Program
     {
         private static void Main(string[] args)
         {
+            PatchCodePage();
             //TestReadFile();
             //TestReadHttpConn();
             TestWriteNewDbf();
@@ -18,6 +20,13 @@ namespace TestDbfLib
 
         private static readonly string TestPath = Path.GetTempPath();
 
+        private static void PatchCodePage() {
+        //Hint:patch codepage for dotnetcore
+#if NETCOREAPP
+            var a = CodePagesEncodingProvider.Instance;
+            Encoding.RegisterProvider(a);
+#endif
+        }
         private static void TestWriteNewDbf()
         {
             //create a simple DBF file and output to args[0]

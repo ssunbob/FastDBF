@@ -1,14 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net40;net45;net461</TargetFrameworks>
     <Product>Social Explorer FastDBF</Product>
     <Description>Social Explorer FastDBF library provides DBF file reading and writing facilities.</Description>
     <Copyright>Copyright © Social Explorer 2007"</Copyright>
-    <PackageLicenseUrl>https://github.com/alexxonline/FastDBF/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/alexxonline/FastDBF</PackageProjectUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/ssunbob/FastDBF</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>dbf</PackageTags>
+    <PackageLicenseExpression>BSD-2</PackageLicenseExpression>
+    <PackageLicenseFile></PackageLicenseFile>
   </PropertyGroup>
 
 </Project>

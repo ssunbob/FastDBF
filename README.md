@@ -13,3 +13,6 @@ ssunbob
 ## Improvements
 * Merge some pull-requests from original branch (#9,#17)
 * Improve the situation when field name contains multibyte characters like CJK. 
+* MultiTaget Mapping to NET40,NET45 and NET461 for example (**Need VS2019**).
+You can adjust this based on your workload.
+* Use preprocessor symbols to improve the testApp running in DotnetCore Environment.
