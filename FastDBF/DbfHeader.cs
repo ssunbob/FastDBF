@@ -569,7 +569,8 @@ namespace SocialExplorer.IO.FastDBF
             // type of reader.
             int nFileType = reader.ReadByte();
 
-            if (nFileType != 0x03)
+            // allow reading of FoxBASE+/dBASE III PLUS, with memo
+            if (nFileType != 0x03  && nFileType != 0x83) 
                 throw new NotSupportedException("Unsupported DBF reader Type " + nFileType);
 
             // parse the update date information.
