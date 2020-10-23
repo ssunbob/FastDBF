@@ -8,4 +8,8 @@ with .NET Core and .Net Standard support
 
 Enjoy
 
-Alex Saez
+ssunbob
+
+## Improvements
+* Merge some pull-requests from original branch (#9,#17)
+* Improve the situation when field name contains multibyte characters like CJK. 
